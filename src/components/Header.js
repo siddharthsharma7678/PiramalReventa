@@ -1,15 +1,39 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import logo from "../PiramalImge/logo.png";
 import "../css/Header.css";
+
 const Header = () => {
   const [open, setOpen] = useState(false);
+  const [scrolled, setScrolled] = useState(false);
+
+  // Scroll effect
+  useEffect(() => {
+    const handleScroll = () => {
+      if (window.scrollY > 50) {
+        setScrolled(true);
+      } else {
+        setScrolled(false);
+      }
+    };
+    window.addEventListener("scroll", handleScroll);
+    return () => window.removeEventListener("scroll", handleScroll);
+  }, []);
+
+  // Dynamic text color
+  const navTextClass = scrolled
+    ? "text-white hover:text-gray-300"
+    : "text-gray-700 hover:text-blue-600";
 
   return (
-    <header className="fixed top-0 left-0 w-full z-50 shadow bg-[#EBEBCF]">
+    <header
+      className={`fixed top-0 left-0 w-full z-50 shadow transition-colors duration-300 ${
+        scrolled ? "bg-[rgb(12_55_48/1)]" : "bg-[#EBEBCF]"
+      }`}
+    >
       <div className="max-w-7xl mx-auto px-4">
         <nav className="flex items-center justify-between py-3">
           {/* Logo */}
-          <a href="/" className="flex-shrink-0">
+          <a href="#" className="flex-shrink-0">
             <img
               src={logo}
               alt="logo"
@@ -18,7 +42,13 @@ const Header = () => {
           </a>
 
           {/* Mobile Appointment Button */}
-          <button className="bg-green-600 text-white px-4 py-2 rounded-md text-sm block md:hidden">
+          <button
+            className={`px-4 py-2 rounded-md text-sm block md:hidden transition-colors ${
+              scrolled
+                ? "bg-white text-green-700"
+                : "bg-[rgb(12_55_48/1)] text-white"
+            }`}
+          >
             Book Appointment
           </button>
 
@@ -28,7 +58,6 @@ const Header = () => {
             onClick={() => setOpen(!open)}
           >
             {!open ? (
-              // Hamburger Icon
               <svg
                 className="w-7 h-7"
                 fill="none"
@@ -43,7 +72,6 @@ const Header = () => {
                 />
               </svg>
             ) : (
-              // Close Icon
               <svg
                 className="w-7 h-7"
                 fill="none"
@@ -62,28 +90,22 @@ const Header = () => {
 
           {/* Desktop Menu */}
           <div className="hidden md:flex items-center space-x-8">
-            <a href="/" className="text-gray-700 hover:text-blue-600">
+            <a href="#overview" className={navTextClass}>
               Overview
             </a>
-            <a
-              href="/configuration"
-              className="text-gray-700 hover:text-blue-600"
-            >
-              Configuration
+            <a href="#highlights" className={navTextClass}>
+              Highlights
             </a>
-            <a href="/amenities" className="text-gray-700 hover:text-blue-600">
+            <a href="#amenities" className={navTextClass}>
               Amenities
             </a>
-            <a href="/gallery" className="text-gray-700 hover:text-blue-600">
+            <a href="#gallery" className={navTextClass}>
               Gallery
             </a>
-            <a href="/location" className="text-gray-700 hover:text-blue-600">
+            <a href="#location" className={navTextClass}>
               Location
             </a>
-            <a href="/about" className="text-gray-700 hover:text-blue-600">
-              About Us
-            </a>
-            <a href="/contact" className="text-gray-700 hover:text-blue-600">
+            <a href="#contact" className={navTextClass}>
               Contact Us
             </a>
           </div>
@@ -91,46 +113,65 @@ const Header = () => {
 
         {/* Mobile Dropdown Menu */}
         {open && (
-          <div className="md:hidden bg-white shadow-md rounded-lg p-4 mt-2 space-y-3 animate-fadeIn">
-            <a href="/" className="block text-gray-700 hover:text-blue-600">
-              Overview
-            </a>
-            <a
-              href="/configuration"
-              className="block text-gray-700 hover:text-blue-600"
+          <div className="fixed inset-0 z-50 flex justify-end">
+            {/* Overlay */}
+            <div
+              className="absolute inset-0 bg-black bg-opacity-50"
+              onClick={() => setOpen(false)}
+            ></div>
+
+            {/* Sliding Menu */}
+            <div
+              className="relative h-full w-64 bg-white shadow-lg p-4 transform transition-transform duration-300 ease-in-out"
+              style={{ transform: open ? "translateX(0)" : "translateX(100%)" }}
             >
-              Configuration
-            </a>
-            <a
-              href="/amenities"
-              className="block text-gray-700 hover:text-blue-600"
-            >
-              Amenities
-            </a>
-            <a
-              href="/gallery"
-              className="block text-gray-700 hover:text-blue-600"
-            >
-              Gallery
-            </a>
-            <a
-              href="/location"
-              className="block text-gray-700 hover:text-blue-600"
-            >
-              Location
-            </a>
-            <a
-              href="/about"
-              className="block text-gray-700 hover:text-blue-600"
-            >
-              About Us
-            </a>
-            <a
-              href="/contact"
-              className="block text-gray-700 hover:text-blue-600"
-            >
-              Contact Us
-            </a>
+              {/* Close Button */}
+              <button
+                className="absolute top-3 right-3 text-gray-700 text-xl"
+                onClick={() => setOpen(false)}
+              >
+                &times;
+              </button>
+
+              <nav className="flex flex-col items-end space-y-3 text-right mt-10">
+                <a
+                  href="#overview"
+                  className="text-gray-700 hover:text-blue-600"
+                >
+                  Overview
+                </a>
+                <a
+                  href="#highlight"
+                  className="text-gray-700 hover:text-blue-600"
+                >
+                  Highlights
+                </a>
+                <a
+                  href="#amenities"
+                  className="text-gray-700 hover:text-blue-600"
+                >
+                  Amenities
+                </a>
+                <a
+                  href="#gallery"
+                  className="text-gray-700 hover:text-blue-600"
+                >
+                  Gallery
+                </a>
+                <a
+                  href="#location"
+                  className="text-gray-700 hover:text-blue-600"
+                >
+                  Location
+                </a>
+                <a
+                  href="#contact"
+                  className="text-gray-700 hover:text-blue-600"
+                >
+                  Contact Us
+                </a>
+              </nav>
+            </div>
           </div>
         )}
       </div>

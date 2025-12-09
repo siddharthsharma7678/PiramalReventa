@@ -1,7 +1,6 @@
 import React from "react";
 import over1 from "../PiramalImge/over1.jpg";
 import over2 from "../PiramalImge/over2.jpg";
-
 import highlight1 from "../PiramalImge/highlights1.png";
 import highlight2 from "../PiramalImge/highlights2.png";
 import highlight3 from "../PiramalImge/highlights3.png";
@@ -11,7 +10,10 @@ import highlight6 from "../PiramalImge/highlights6.png";
 import "../css/Overview.css";
 
 const highlights = [
-  { img: highlight1, text: "2 Multilevel Clubhouses with 30,000 sq.ft. of Amenities" },
+  {
+    img: highlight1,
+    text: "2 Multilevel Clubhouses with 30,000 sq.ft. of Amenities",
+  },
   { img: highlight2, text: "3 Acre Paradise with Only 2 Towers (Vana)" },
   { img: highlight3, text: "Phase 1 Clubhouse & Podium Amenities Delivered" },
   { img: highlight4, text: "Over 60% Open Spaces" },
@@ -21,7 +23,7 @@ const highlights = [
 
 const Overview = () => {
   return (
-    <section id="overview" className="py-12 md:py-20">
+    <section id="overview" className="py-12 mt-2 md:py-20">
       <div className="max-w-7xl mx-auto px-4">
         {/* Title and Description */}
         <div className="relative flex flex-col md:flex-row items-center justify-center mb-12 md:mb-16 space-y-6 md:space-y-0 md:space-x-8">
@@ -49,12 +51,11 @@ const Overview = () => {
 
           {/* Overview title positioned above the circle */}
           <h3
-  className="absolute -top-2 sm:top-12 md:top-16 left-1/2 transform -translate-x-1/2 text-4xl sm:text-5xl md:text-6xl font-bold z-20"
-  style={{ color: "#0c3730" }}
->
-  OVERVIEW
-</h3>
-
+            className="absolute -top-2 sm:top-4 md:top-16 left-1/2 transform -translate-x-1/2 text-4xl sm:text-5xl md:text-6xl font-bold z-20 hover:bg-[#EBEBCF]"
+            style={{ color: "#0c3730" }}
+          >
+            OVERVIEW
+          </h3>
         </div>
 
         {/* Images Section */}

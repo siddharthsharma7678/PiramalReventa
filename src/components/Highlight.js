@@ -1,5 +1,5 @@
 import React, { useRef, useEffect } from "react";
-import '../css/Highlight.css'
+import "../css/Highlight.css";
 import highlight1 from "../PiramalImge/highlights1.png";
 import highlight2 from "../PiramalImge/highlights2.png";
 import highlight3 from "../PiramalImge/highlights3.png";
@@ -8,7 +8,10 @@ import highlight5 from "../PiramalImge/highlights5.png";
 import highlight6 from "../PiramalImge/highlights6.png";
 
 const highlights = [
-  { img: highlight1, text: "2 Multilevel Clubhouses with 30,000 sq.ft. of Amenities" },
+  {
+    img: highlight1,
+    text: "2 Multilevel Clubhouses with 30,000 sq.ft. of Amenities",
+  },
   { img: highlight2, text: "3 Acre Paradise with Only 2 Towers (Vana)" },
   { img: highlight3, text: "Phase 1 Clubhouse & Podium Amenities Delivered" },
   { img: highlight4, text: "Over 60% Open Spaces" },
@@ -47,8 +50,11 @@ const InfiniteHighlights = () => {
   const displayHighlights = [...highlights, ...highlights];
 
   return (
-    <div className="relative px-4 md:px-8">
-      <h3 className="text-3xl md:text-4xl font-semibold mb-6 text-center">HIGHLIGHTS</h3>
+    <section>
+    <div id='highlights' className="relative px-4 mt-4 md:px-8">
+      <h3 className="text-3xl md:text-4xl font-semibold mb-6 text-center">
+        HIGHLIGHTS
+      </h3>
       <div className="flex items-center">
         {/* Left Arrow */}
         <button
@@ -60,23 +66,36 @@ const InfiniteHighlights = () => {
 
         {/* Carousel */}
         <div
-          ref={carouselRef}
-          className="flex overflow-x-auto space-x-6 scrollbar-hide snap-x snap-mandatory mx-4 md:mx-6"
-        >
-          {displayHighlights.map((item, idx) => (
-            <div
-              key={idx}
-              className="flex-shrink-0 w-48 md:w-48 bg-white rounded-xl shadow-lg p-4 snap-center"
-            >
-              <img
-                src={item.img}
-                alt={`highlight-${idx}`}
-                className="mx-auto mb-4 h-16 md:h-20 object-contain filter brightness-0 invert-[15%] sepia-[100%] saturate-[7500%] hue-rotate-[200deg] contrast-[90%]"
-              />
-              <p className="text-[#212529] text-sm md:text-base text-center">{item.text}</p>
-            </div>
-          ))}
-        </div>
+  ref={carouselRef}
+  className="flex overflow-x-auto space-x-6 scrollbar-hide snap-x snap-mandatory mx-4 md:mx-6"
+>
+  {displayHighlights.map((item, idx) => (
+    <div
+      key={idx}
+      className="
+        flex-shrink-0 
+        w-40 h-40 md:w-48 md:h-48      /* make card a circle */
+        bg-white 
+        rounded-full                  /* circle shape */
+        shadow-lg 
+        p-4 
+        flex flex-col items-center justify-center /* center content */
+        snap-center
+      "
+    >
+      <img
+        src={item.img}
+        alt={`highlight-${idx}`}
+        className="mb-3 h-12 md:h-16 object-contain 
+          filter brightness-0 invert-[15%] sepia-[100%] saturate-[7500%] hue-rotate-[200deg] contrast-[90%]"
+      />
+      <p className="text-[#212529] text-xs md:text-sm text-center px-2">
+        {item.text}
+      </p>
+    </div>
+  ))}
+</div>
+
 
         {/* Right Arrow */}
         <button
@@ -87,6 +106,7 @@ const InfiniteHighlights = () => {
         </button>
       </div>
     </div>
+    </section>
   );
 };
 

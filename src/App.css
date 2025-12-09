@@ -1,8 +1,14 @@
+html {
+  scroll-behavior: smooth;
+}
+
 @import url('https://fonts.googleapis.com/css2?family=Bon+Vivant+Family+Serif&display=swap');
 body {
   @apply font-bonvivant;
 }
-
+section {
+  scroll-margin-top: 100px; /* equal or slightly more than your fixed header */
+}
 .App {
   text-align: center;
 }
