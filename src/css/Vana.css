@@ -1,0 +1,21 @@
+.card-hover::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: -100%;
+  width: 100%;
+  height: 100%;
+  background-color: #0c3730; /* final color */
+  opacity: 0.8; /* optional: make it slightly transparent */
+  transition: all 0.5s ease;
+  z-index: 0;
+}
+
+.card-hover:hover::before {
+  left: 0;
+}
+
+.card-hover * {
+  position: relative;
+  z-index: 10;
+}
